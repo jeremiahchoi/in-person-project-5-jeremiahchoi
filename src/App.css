@@ -29,6 +29,7 @@
     /* Typography */
     --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
     --font-mono: 'Courier New', monospace;
+    --font-size: clamp(14px, 2vw, 18px);
 }
 
 body {
@@ -60,8 +61,8 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: var(--spacing-sm);
 }
 
-h1 { font-size: 3rem; }
-h2 { font-size: 2.5rem; }
+h1 { font-size: clamp(2rem, 5vw, 4rem); }
+h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
 h3 { font-size: 1.5rem; }
 
 p {
@@ -78,8 +79,11 @@ a:hover {
     color: var(--secondary-color);
 }
 
-/* Navigation Bar - TO BE ENHANCED WITH FLEXBOX */
+/* Navigation Bar - TO BE ENHANCED WITH FLEXBOX - Done. */
 #navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     padding: var(--spacing-sm) var(--spacing-md);
     position: sticky;
@@ -89,18 +93,20 @@ a:hover {
 }
 
 .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     color: var(--white);
     font-size: 1.5rem;
     font-weight: bold;
 }
 
 .nav-menu {
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
     list-style: none;
-}
-
-.nav-menu li {
-    display: inline-block;
-    margin-left: var(--spacing-md);
 }
 
 .nav-link {
@@ -133,12 +139,29 @@ a:hover {
     transition: 0.3s;
 }
 
-/* Hero Section - TO BE ENHANCED WITH FLEXBOX */
+/* Hero Section - TO BE ENHANCED WITH FLEXBOX - Done.*/
 .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     color: var(--white);
     padding: var(--spacing-xl) var(--spacing-md);
     min-height: 60vh;
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
 }
 
 .hero-title {
@@ -191,7 +214,7 @@ a:hover {
     color: var(--primary-color);
 }
 
-/* About Section - TO BE ENHANCED WITH GRID */
+/* About Section - TO BE ENHANCED WITH GRID - Done.*/
 .about-grid {
     margin-top: var(--spacing-md);
 }
@@ -232,6 +255,9 @@ a:hover {
 
 /* Skills Section - TO BE TRANSFORMED WITH GRID */
 .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
     margin-top: var(--spacing-md);
 }
 
@@ -240,7 +266,6 @@ a:hover {
     padding: var(--spacing-md);
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    margin-bottom: var(--spacing-md);
     transition: transform 0.3s ease;
 }
 
@@ -281,12 +306,6 @@ a:hover {
     background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
     width: var(--skill-level);
     transition: width 1s ease;
-    animation: fillProgress 1s ease forwards;
-}
-
-@keyframes fillProgress {
-    from { width: 0; }
-    to { width: var(--skill-level); }
 }
 
 .skill-percentage {
@@ -294,40 +313,11 @@ a:hover {
     color: var(--text-light);
 }
 
-/* Projects Section - TO BE ENHANCED WITH GRID */
-/* Filter Buttons - Week 7 Addition */
-.filter-buttons {
-    display: flex;
-    justify-content: center;
-    gap: var(--spacing-sm);
-    margin: var(--spacing-md) 0;
-    flex-wrap: wrap;
-}
-
-.filter-btn {
-    padding: var(--spacing-xs) var(--spacing-md);
-    border: 2px solid var(--primary-color);
-    background: transparent;
-    color: var(--primary-color);
-    border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-.filter-btn:hover {
-    background: var(--primary-color);
-    color: var(--white);
-    transform: translateY(-2px);
-}
-
-.filter-btn.active {
-    background: var(--primary-color);
-    color: var(--white);
-}
-
+/* Projects Section - TO BE ENHANCED WITH GRID - Done. */
 .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
     margin-top: var(--spacing-md);
 }
 
@@ -336,13 +326,17 @@ a:hover {
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    margin-bottom: var(--spacing-md);
     transition: transform 0.3s ease;
 }
 
 .project-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+}
+
+.project-card.featured {
+    grid-column: span 2;
+    grid-row: span 2;
 }
 
 .project-image {
@@ -401,10 +395,16 @@ a:hover {
 }
 
 .project-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     padding: var(--spacing-md);
 }
 
 .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     margin-bottom: var(--spacing-sm);
 }
 
@@ -427,7 +427,10 @@ a:hover {
 }
 
 .project-tags {
-    margin-top: var(--spacing-sm);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: auto;
 }
 
 .project-tag {
@@ -437,11 +440,9 @@ a:hover {
     color: var(--white);
     border-radius: 15px;
     font-size: 0.85rem;
-    margin-right: var(--spacing-xs);
-    margin-bottom: var(--spacing-xs);
 }
 
-/* Contact Form - TO BE ENHANCED WITH GRID */
+/* Contact Form - TO BE ENHANCED WITH GRID - Done.*/
 .contact-content {
     max-width: 800px;
     margin: 0 auto;
@@ -480,34 +481,6 @@ a:hover {
 
 .form-group textarea {
     resize: vertical;
-}
-
-/* Form Validation Styles - Week 7 Addition */
-.error-message {
-    color: #dc2626;
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
-    display: block;
-}
-
-.form-group input.error,
-.form-group textarea.error {
-    border-color: #dc2626;
-}
-
-.form-group input.success,
-.form-group textarea.success {
-    border-color: #059669;
-}
-
-.success-message {
-    background: #d1fae5;
-    color: #059669;
-    padding: var(--spacing-sm);
-    border-radius: 8px;
-    margin-top: var(--spacing-md);
-    text-align: center;
-    font-weight: 500;
 }
 
 /* Footer */
@@ -559,3 +532,88 @@ a:hover {
 .mb-1 { margin-bottom: var(--spacing-sm); }
 .mb-2 { margin-bottom: var(--spacing-md); }
 .mb-3 { margin-bottom: var(--spacing-lg); }
+
+/* Filter Buttons */
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.5rem 1.5rem;
+    border: 2px solid #667eea;
+    background: transparent;
+    color: #667eea;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.filter-btn:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background: #667eea;
+    color: white;
+}
+
+/* Form Validation Styles */
+.error-message {
+    color: #dc2626;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.form-group input.error,
+.form-group textarea.error {
+    border-color: #dc2626;
+}
+
+.success-message {
+    background: #d1fae5;
+    color: #059669;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    text-align: center;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background-color: #fff;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0,0,0,0.05);
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-toggle {
+        display: block;
+        cursor: pointer;
+    }
+}
+/* React migration: visible active navigation and an accessible menu button. */
+section { scroll-margin-top: 80px; }
+.nav-link.active { background: rgba(255, 255, 255, 0.2); }
+.nav-toggle { background: transparent; border: 0; padding: 0; }
+@media (max-width: 768px) {
+    .nav-menu { background: var(--primary-color); padding: 1rem 0; }
+}
